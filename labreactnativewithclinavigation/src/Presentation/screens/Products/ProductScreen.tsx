@@ -1,38 +1,50 @@
-import { FlatList, Text, View } from "react-native";
+import {Text, View} from "react-native";
+import HomeScreen from "../home/HomeScreen.tsx";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { RootStackParams } from "../../routes/StackNavigator.tsx";
 import { globalStyles } from "../../theme/theme.tsx";
-import PrimaryButton from "../../components/PrimaryButton.tsx";
-import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 
-const productos = [
-  { id: 1, name: 'Camiseta de algodón', price: 20.99, category: 'Ropa' },
-  { id: 2, name: 'Zapatos deportivos', price: 49.99, category: 'Calzado' },
-  { id: 3, name: 'Portátil HP', price: 799.99, category: 'Tecnología' },
-  { id: 4, name: 'Libro de cocina', price: 14.50, category: 'Libros' },
-  { id: 5, name: 'Gafas de sol polarizadas', price: 35.75, category: 'Accesorios' },
-  { id: 6, name: 'Reloj inteligente', price: 129.99, category: 'Tecnología' }
-];
-const ProductsScreen = () => {
- const navigation = useNavigation();
+const ProductScreen = () => {
+
+  const  params = useRoute<RouteProp<RootStackParams, 'Product'>>().params;
+
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions(
+      {
+        title: params.name,
+      }
+    )
+  }, []);
+
   return (
     <View style={globalStyles.container}>
-      <Text style={{marginBottom:10, fontSize:20}}>Productos</Text>
+      <Text>Product-Screen</Text>
+      <Text style={{
+        fontSize : 20,
+        textAlign: 'center',
+        marginTop: 20,
+      }}>
+       Category: {params.category}
+      </Text>
 
-      <FlatList
-        data={productos}
-        renderItem={
-          ({item}) => (
-            <PrimaryButton
-              onPress={() => {navigation.navigate('Product' as never)}}
-              label = {item.name}
-            />
-          )
-        }
-      />
-
-      <Text style={{marginBottom:10, fontSize: 20}}>Ajustes</Text>
-      <PrimaryButton label="Configuración" onPress={()=>navigation.navigate('Settings' as never)}/>
+      <Text style={{
+        fontSize : 20,
+        textAlign: 'center',
+        marginTop: 20,
+      }}>
+        Product: {params.id} - {params.name}
+      </Text>
+      <Text style={{
+        fontSize : 20,
+        textAlign: 'center',
+        marginTop: 20,
+      }}>
+        Price: US {params.price}
+      </Text>
     </View>
   )
 }
 
-export default ProductsScreen;
+export default ProductScreen;

@@ -3,7 +3,7 @@ import HomeScreen from "../home/HomeScreen.tsx";
 import { globalStyles } from "../../theme/theme.tsx";
 import PrimaryButton from "../../components/PrimaryButton.tsx";
 import { type NavigationProp, useNavigation } from "@react-navigation/native";
-import { type RootStackParams } from "../../route/StackNavigator.tsx";
+import { type RootStackParams } from "../../routes/StackNavigator.tsx";
 
 const productos = [
   { id: 1, name: 'Camiseta de algodón', price: 20.99, category: 'Ropa' },
