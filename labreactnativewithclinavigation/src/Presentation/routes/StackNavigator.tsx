@@ -1,10 +1,17 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from "../screens/Home/HomeScreen.tsx";
-import ProductsScreen from "../screens/Products/ProductScreen.tsx";
-import SettingsScreen from "../screens/Settings/SettingsScreen.tsx";
-import ProductScreen from "../screens/Products/ProductsScreen.tsx";
+import HomeScreen from "../screens/home/HomeScreen.tsx";
+import ProductsScreen from "../screens/products/ProductsScreen.tsx";
+import SettingsScreen from "../screens/settings/SettingsScreen.tsx";
+import ProductScreen from "../screens/products/ProductScreen.tsx";
 
-const Stack = createStackNavigator();
+export type RootStackParams = {
+  Home : undefined,
+  Product: {id: number, name : string, price: number, category: string},
+  Products : undefined,
+  Settings : undefined,
+}
+
+const Stack = createStackNavigator<RootStackParams>();
 
 function StackNavigator() {
   return (
